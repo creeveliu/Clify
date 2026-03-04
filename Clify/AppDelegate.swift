@@ -17,10 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let settingsPath: String = FileManager.default.homeDirectoryForCurrentUser.path + "/.claude/settings.json"
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // 隐藏主窗口
-        if let window = NSApp.windows.first {
-            window.isReleasedWhenClosed = true
-            window.close()
+        // 隐藏主窗口（不关闭，避免破坏 Storyboard 默认菜单层级）
+        for window in NSApp.windows {
+            window.orderOut(nil)
         }
 
         setupStatusBar()
