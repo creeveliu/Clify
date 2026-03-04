@@ -200,7 +200,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if var hooks = config["hooks"] as? [String: Any] {
             var notifications = hooks["Notification"] as? [[String: Any]] ?? []
 
-            // 移除 Clify hooks
+            // 移除 Clify hooks（Notification）
             notifications = notifications.filter { notification in
                 guard let hooksArray = notification["hooks"] as? [[String: Any]] else { return true }
                 for hook in hooksArray {
@@ -216,6 +216,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             } else {
                 hooks["Notification"] = notifications
             }
+
+            // 移除 Stop hook
+            if var stopHooks = hooks["Stop"] as? [[String: Any]] {
+                let filteredStopHooks = stopHooks.filter { hookDict in
+                    guard let hookArray = hookDict["hooks"] as? [[String: Any]] else { return true }
+                    for hook in hookArray {
+                        if let command = hook["command"] as? String, isClifyHook(command: command) {
+                            return false
+                        }
+                    }
+                    return true
+                }
+                if filteredStopHooks.isEmpty {
+                    hooks.removeValue(forKey: "Stop")
+                } else {
+                    hooks["Stop"] = filteredStopHooks
+                }
+            }
+
             config["hooks"] = hooks
 
             if writeConfig(config) {
