@@ -66,3 +66,7 @@ fastlane/test_output
 *.prefs
 *.user
 *.log
+
+# Build
+build/
+*.xcarchive
