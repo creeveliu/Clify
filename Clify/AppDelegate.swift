@@ -17,7 +17,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let settingsPath: String = FileManager.default.homeDirectoryForCurrentUser.path + "/.claude/settings.json"
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // 隐藏主窗口（不关闭，避免破坏 Storyboard 默认菜单层级）
+        // 设置为 accessory 模式，应用不显示在 Dock 中，也没有主菜单
+        NSApp.setActivationPolicy(.accessory)
+
+        // 隐藏主窗口
         for window in NSApp.windows {
             window.orderOut(nil)
         }
