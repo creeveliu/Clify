@@ -108,6 +108,7 @@ open Clify.xcodeproj
 - ⚠️ **不支持 VSCode 插件**
 - 需要已安装并配置 Claude Code CLI
 - 配置文件路径：`~/.claude/settings.json`
+- 💡 **本地配置**：Clify 修改的是本地 Claude 配置文件，设置完成后关闭 App 不影响提醒功能
 
 ## 系统要求
 
