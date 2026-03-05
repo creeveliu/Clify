@@ -116,7 +116,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
 
-        // 检查是否有 Glass.aiff hook（我们的提醒 hook）
+        // 检查是否有 Submarine.aiff hook（我们的提醒 hook）
         for notification in notifications {
             guard let hooksArray = notification["hooks"] as? [[String: Any]] else {
                 continue
@@ -124,7 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             for hook in hooksArray {
                 if let command = hook["command"] as? String,
-                   command.contains("Glass.aiff") {
+                   command.contains("Submarine.aiff") {
                     return true
                 }
             }
@@ -133,7 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func isClifyHook(command: String) -> Bool {
-        return command.contains("Glass.aiff") ||
+        return command.contains("Submarine.aiff") ||
                command.contains("Funk.aiff")
     }
 
@@ -157,11 +157,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 return true
             }
 
-            // 添加 Clify hooks - idle_prompt: Glass.aiff
+            // 添加 Clify hooks - idle_prompt: Submarine.aiff
             notifications.append([
                 "matcher": "idle_prompt",
                 "hooks": [
-                    ["type": "command", "command": "afplay /System/Library/Sounds/Glass.aiff"]
+                    ["type": "command", "command": "afplay /System/Library/Sounds/Submarine.aiff"]
                 ]
             ])
             // permission_prompt: Funk.aiff
